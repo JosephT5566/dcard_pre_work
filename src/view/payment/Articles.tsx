@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
+
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import Loading from 'view/layout/Loading'
 
 import { useGetInfinitePostsV2 } from 'api/post'
@@ -8,6 +9,7 @@ import { IPost } from 'types/post'
 
 const ArticlesContainer = styled('div')({
     padding: '1em',
+    paddingBottom: '8em',
     background: 'white',
     display: 'flex',
     flexDirection: 'column',
@@ -24,6 +26,19 @@ const StyledPost = styled('div')({
 export default function Articles() {
     const { posts, isFetching, refetch } = useGetInfinitePostsV2()
 
+    useEffect(() => {
+        const scrollEvent = () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                // console.log('at the bottom of the page')
+                refetch()
+            }
+        }
+
+        window.addEventListener('scroll', scrollEvent)
+
+        return () => window.removeEventListener('scroll', scrollEvent)
+    }, [])
+
     return (
         <ArticlesContainer>
             {posts ? (
@@ -34,9 +49,9 @@ export default function Articles() {
                     {isFetching ? (
                         <Loading />
                     ) : (
-                        <Button variant={'outlined'} onClick={() => refetch()}>
+                        <div style={{ padding: '1em', textAlign: 'center' }}>
                             {'load more...'}
-                        </Button>
+                        </div>
                     )}
                 </>
             ) : (
