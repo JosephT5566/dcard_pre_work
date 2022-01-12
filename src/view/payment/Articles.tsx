@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Loading from 'view/layout/Loading'
 
-import { useGetInfinitePosts } from 'api/post'
+import { useGetInfinitePostsV2 } from 'api/post'
 import { IPost } from 'types/post'
 
 const ArticlesContainer = styled('div')({
@@ -22,19 +22,19 @@ const StyledPost = styled('div')({
 })
 
 export default function Articles() {
-    const { infinitePosts, fetchNextPage, isFetchingNextPage } = useGetInfinitePosts()
+    const { posts, isFetching, refetch } = useGetInfinitePostsV2()
 
     return (
         <ArticlesContainer>
-            {infinitePosts ? (
+            {posts ? (
                 <>
-                    {infinitePosts.pages.map((posts) =>
-                        posts.map((post) => <Post post={post} />)
-                    )}
-                    {isFetchingNextPage ? (
+                    {posts.map((post) => (
+                        <Post key={post.id} post={post} />
+                    ))}
+                    {isFetching ? (
                         <Loading />
                     ) : (
-                        <Button variant={'outlined'} onClick={() => fetchNextPage()}>
+                        <Button variant={'outlined'} onClick={() => refetch()}>
                             {'load more...'}
                         </Button>
                     )}

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useQuery, useInfiniteQuery, QueryFunctionContext } from 'react-query'
 import { fetcher } from 'utils/fetcher'
 import { IPost } from 'types/post'
@@ -19,6 +20,34 @@ export const useGetPosts = () => {
     return {
         posts: data,
         error,
+    }
+}
+
+export const useGetInfinitePostsV2 = () => {
+    const [cursor, setCursor] = useState<number | undefined>(undefined)
+    const [posts, setPosts] = useState<IPost[] | undefined>(undefined)
+
+    const url = cursor
+        ? `${API_ENDPOINT}/posts?popular=true&before=${cursor}`
+        : `${API_ENDPOINT}/posts?popular=true`
+
+    const { error, isFetching, refetch } = useQuery<Array<IPost>, Error>({
+        queryKey: [`${API_ENDPOINT}/posts?popular=true`],
+        queryFn: () => fetcher(url),
+        refetchOnWindowFocus: false,
+        onSuccess: (data) => {
+            // console.log('posts', data)
+
+            setPosts((prev) => (prev ? [...prev, ...data] : data))
+            setCursor(data[data.length - 1].id)
+        },
+    })
+
+    return {
+        posts,
+        isFetching,
+        error,
+        refetch,
     }
 }
 
