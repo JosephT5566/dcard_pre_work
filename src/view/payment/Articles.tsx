@@ -1,7 +1,9 @@
-import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Loading from 'view/layout/Loading'
 
-import { useGetPosts } from 'api/post'
+import { useGetInfinitePosts } from 'api/post'
 import { IPost } from 'types/post'
 
 const ArticlesContainer = styled('div')({
@@ -20,15 +22,28 @@ const StyledPost = styled('div')({
 })
 
 export default function Articles() {
-    const { posts } = useGetPosts()
+    const { infinitePosts, fetchNextPage, isFetchingNextPage } = useGetInfinitePosts()
 
-    return posts ? (
+    return (
         <ArticlesContainer>
-            {posts.map((post) => (
-                <Post post={post} />
-            ))}
+            {infinitePosts ? (
+                <>
+                    {infinitePosts.pages.map((posts) =>
+                        posts.map((post) => <Post post={post} />)
+                    )}
+                    {isFetchingNextPage ? (
+                        <Loading />
+                    ) : (
+                        <Button variant={'outlined'} onClick={() => fetchNextPage()}>
+                            {'load more...'}
+                        </Button>
+                    )}
+                </>
+            ) : (
+                <Loading />
+            )}
         </ArticlesContainer>
-    ) : null
+    )
 }
 
 const Post = (props: { post: IPost }) => {
@@ -36,6 +51,9 @@ const Post = (props: { post: IPost }) => {
 
     return (
         <StyledPost>
+            <Typography variant={'subtitle1'} sx={{ fontSize: '0.5rem' }}>
+                {post.id}
+            </Typography>
             <Typography variant={'h2'} sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
                 {post.title}
             </Typography>

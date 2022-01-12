@@ -1,4 +1,5 @@
 export interface IPost {
+    id: number
     title: string
     excerpt: string
 }
@@ -32,8 +33,10 @@ const test = {
         {
             id: 'b8c3c235-e819-440e-9336-c19b0c742aad',
             url: 'https://megapx-assets.dcard.tw/images/7fb68762-ea0b-4939-959d-48edfe2e5c0b/1280.jpeg',
-            normalizedUrl: 'https://megapx.dcard.tw/v1/images/7fb68762-ea0b-4939-959d-48edfe2e5c0b',
-            thumbnail: 'https://megapx-assets.dcard.tw/images/7fb68762-ea0b-4939-959d-48edfe2e5c0b/160.jpeg',
+            normalizedUrl:
+                'https://megapx.dcard.tw/v1/images/7fb68762-ea0b-4939-959d-48edfe2e5c0b',
+            thumbnail:
+                'https://megapx-assets.dcard.tw/images/7fb68762-ea0b-4939-959d-48edfe2e5c0b/160.jpeg',
             type: 'image/megapx',
             tags: [],
             createdAt: '2022-01-10T10:24:09.935Z',
@@ -72,7 +75,8 @@ const test = {
     supportedReactions: null,
     excerptComments: [],
     edited: false,
-    postAvatar: 'https://megapx-assets.dcard.tw/images/806ef7a8-882f-472e-a2c6-0e7fa5dba189/full.jpeg',
+    postAvatar:
+        'https://megapx-assets.dcard.tw/images/806ef7a8-882f-472e-a2c6-0e7fa5dba189/full.jpeg',
     activityAvatar: '',
     verifiedBadge: false,
     memberType: '',
