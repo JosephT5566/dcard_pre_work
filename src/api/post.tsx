@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery } from 'react-query'
 import { fetcher } from 'utils/fetcher'
-import { Post } from 'types/post'
+import { IPost } from 'types/post'
 
 import { API_ENDPOINT } from '../config'
 
@@ -8,7 +8,7 @@ import { API_ENDPOINT } from '../config'
 // before?: number (post id)
 
 export const useGetPosts = () => {
-    const { data, error } = useQuery<Array<Post>, Error>({
+    const { data, error } = useQuery<Array<IPost>, Error>({
         queryKey: [`${API_ENDPOINT}/posts?popular=true`],
         queryFn: () => fetcher(`${API_ENDPOINT}/posts?popular=true`),
         onSuccess: (data) => {
@@ -23,7 +23,7 @@ export const useGetPosts = () => {
 }
 
 export const useGetInfinitePosts = () => {
-    const { data, error } = useInfiniteQuery<Array<Post>, Error>({
+    const { data, error } = useInfiniteQuery<Array<IPost>, Error>({
         queryKey: [`${API_ENDPOINT}/posts?popular=true`],
         queryFn: () => fetcher(`${API_ENDPOINT}/posts?popular=true`),
     })
