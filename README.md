@@ -15,6 +15,11 @@ An infinite scrolled website
 
 ## Description
 
+### Tools
+
+* @mui/library: handle the basic component
+* react-query: handle the data-fetching in React
+
 ### Proxy
 
 Use proxy service to pass the requests to api server, avoiding the restriction of CORS
