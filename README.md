@@ -1,2 +1,40 @@
 # dcard_pre_work
-infinite scroll
+An infinite scrolled website
+
+## Start procedure
+
+1. Execute proxy service
+    ```
+    yarn proxy
+    ```
+2. Execute React service
+    ```
+    yarn start
+    ```
+    make sure the React service is running on port `3000`
+
+## Description
+
+### Proxy
+
+Use proxy service to pass the requests to api server, avoiding the restriction of CORS
+
+### Structure
+
+```txt
+src/
+    api/
+        post.tsx
+    components/
+        shared/
+            Post.tsx
+    types/
+        post.ts
+    utils/
+        fetcher.ts
+    view/
+        layout/
+            Loading.tsx
+        payment/
+            Articles.tsx
+```
