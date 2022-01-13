@@ -2,7 +2,6 @@ import moment from 'moment'
 
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
-import Loading from 'view/layout/Loading'
 
 import { IPost } from 'types/post'
 

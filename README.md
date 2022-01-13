@@ -3,11 +3,15 @@ An infinite scrolled website
 
 ## Start procedure
 
-1. Execute proxy service
+1. Install all the dependencies
+    ```
+    yarn install-all
+    ```
+2. Execute proxy service
     ```
     yarn proxy
     ```
-2. Execute React service
+3. Execute React service
     ```
     yarn start
     ```
