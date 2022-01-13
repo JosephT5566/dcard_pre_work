@@ -21,7 +21,7 @@ An infinite scrolled website
 
 ### Tools
 
-* @mui/library: handle the basic component
+* @mui/material: handle the basic component
 * react-query: handle the data-fetching in React
 
 ### Proxy
