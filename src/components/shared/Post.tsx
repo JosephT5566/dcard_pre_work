@@ -68,6 +68,7 @@ export default function Post(props: { post: IPost }) {
             {post.media.length > 0 ? (
                 <div
                     className={'thumb'}
+                    data-testid={'thumb'}
                     style={{
                         width: 84,
                         height: 84,
